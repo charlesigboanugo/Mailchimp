@@ -25,7 +25,7 @@ async def apipost(req: Item):
         "message": "message",
         "username": "Uptime Monitor",
         "event_name": "Uptime Check",
-        "status": "error"
+        "status": "success"
     }
     async with httpx.AsyncClient() as client:
         await client.post(f"https://ping.telex.im/v1/webhooks/{req.channel_id}", json=data)

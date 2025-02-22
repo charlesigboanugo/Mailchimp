@@ -131,6 +131,13 @@ def getJson():
             "author": "CHARLES",
             "settings": [
             {
+               "label": "interval",
+                "type": "text",
+                "required": True,
+                "default": "*/2 * * * *"
+
+            },
+            {
                 "label": "password",
                 "type": "text",
                 "required": True,
