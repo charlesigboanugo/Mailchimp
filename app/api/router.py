@@ -12,3 +12,6 @@ api_router.include_router(jsonfile.router, prefix="/integration.json", tags=["js
 def apiHome():
     return "api home"
 
+@api_router.post("/")
+def apipost():
+    return {"status": "accpted"}
