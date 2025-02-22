@@ -21,4 +21,4 @@ class Item(BaseModel):
 @api_router.post("/")
 def apipost(req: Item):
     print(req)
-    return {"status": "accepted"}
+    return {"status": "success"}
