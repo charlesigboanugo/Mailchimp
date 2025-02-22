@@ -10,15 +10,17 @@ app = FastAPI(debug=settings.DEBUG,
                description=settings.APP_DESCRIPTION,
                version=settings.APP_VERSION)
 
-app.add_middleware(CORSMiddleware,
+app.add_middleware(CORSMiddleware, 
                    allow_origins=[
                        "https://telex.im",
                         "https://staging.telex.im",
                         "http://telextest.im",
                         "http://staging.telextest.im",
                         "https://ping.telex.im"],
+                   allow_credentials=True,
                    allow_methods=["*"],
-                   allow_headers=["*"])
+                   allow_headers=["*"]
+                   )
 
 app.include_router(api_router, prefix=settings.API_PREFIX, tags=["api"])
 
