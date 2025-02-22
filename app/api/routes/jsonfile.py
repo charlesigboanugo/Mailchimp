@@ -74,11 +74,7 @@ def getJson():
             "descriptions": {
             "app_name": "stackerX",
             "app_description": "good and great",
-<<<<<<< HEAD
             "app_logo": "http://ec2-16-171-113-126.eu-north-1.compute.amazonaws.com/static/stackerx.png",
-=======
-            "app_logo": "http://ec2-16-171-113-126.eu-north-1.compute.amazonaws.com/static/favicon.ico",
->>>>>>> c0bd1b371406787b050f9500f9af55a37cebad36
             "app_url": "http://ec2-16-171-113-126.eu-north-1.compute.amazonaws.com",
             "background_color": "#fff"
             },
