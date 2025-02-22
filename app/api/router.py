@@ -13,5 +13,6 @@ def apiHome():
     return "api home"
 
 @api_router.post("/")
-def apipost():
+def apipost(req):
+    print(req)
     return {"status": "accpted"}
