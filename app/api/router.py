@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
 from app.api.routes import jsonfile
 
@@ -12,7 +13,14 @@ api_router.include_router(jsonfile.router, prefix="/integration.json", tags=["js
 def apiHome():
     return "api home"
 
+class Item(BaseModel):
+    key: str
+    value: str
+
+    class Config:
+        extra = "allow"
+
 @api_router.post("/")
-def apipost(req):
+def apipost(req: Item):
     print(req)
-    return {"status": "accpted"}
+    return {"status": "accepted"}
