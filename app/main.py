@@ -17,7 +17,6 @@ app.add_middleware(CORSMiddleware,
                         "http://telextest.im",
                         "http://staging.telextest.im",
                         "https://ping.telex.im"],
-                   allow_credentials=True,
                    allow_methods=["*"],
                    allow_headers=["*"])
 
