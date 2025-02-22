@@ -17,7 +17,7 @@ def getJson():
                     },
                     "descriptions": {
                         "app_description": settings.APP_DESCRIPTION,
-                        "app_logo": settings.BASE_URL,
+                        "app_logo": "http://ec2-16-171-113-126.eu-north-1.compute.amazonaws.com/api/v1/static/favicon.ico",
                         "app_name": settings.APP_NAME,
                         "app_url": settings.BASE_URL,
                         "background_color": "#A6CDE0"
