@@ -11,7 +11,11 @@ app = FastAPI(debug=settings.DEBUG,
                version=settings.APP_VERSION)
 
 app.add_middleware(CORSMiddleware,
-                   allow_origins=["*"],
+                   allow_origins=[
+                       "https://telex.im",
+                        "https://staging.telex.im",
+                        "http://telextest.im",
+                        "http://staging.telextest.im"],
                    allow_credentials=True,
                    allow_methods=["*"],
                    allow_headers=["*"])
