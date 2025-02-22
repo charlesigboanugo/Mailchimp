@@ -14,8 +14,6 @@ def apiHome():
     return "api home"
 
 class Item(BaseModel):
-    channel_id: str
-    return_url: str
 
     class Config:
         extra = "allow"
