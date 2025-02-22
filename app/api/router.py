@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+import httpx
 
 from app.api.routes import jsonfile
 
@@ -19,6 +20,14 @@ class Item(BaseModel):
         extra = "allow"
 
 @api_router.post("/")
-def apipost(req: Item):
+async def apipost(req: Item):
+    data = {
+        "message": "message",
+        "username": "Uptime Monitor",
+        "event_name": "Uptime Check",
+        "status": "error"
+    }
+    async with httpx.AsyncClient() as client:
+        await client.post(f"https://ping.telex.im/v1/webhooks/{req.channel_id}", json=data)
     print(req)
-    return {"status": "success"}
+    return {"status": "accepted"}
