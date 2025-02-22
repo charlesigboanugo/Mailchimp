@@ -15,6 +15,7 @@ def getJson():
                         "created_at": "2025-2-22",
                         "updated_at": f"{currentDate.year}-{currentDate.month}-{currentDate.day}"
                     },
+                    "author": "Charles Igboanugo",
                     "descriptions": {
                         "app_description": settings.APP_DESCRIPTION,
                         "app_logo": "http://ec2-16-171-113-126.eu-north-1.compute.amazonaws.com/static/favicon.ico",
