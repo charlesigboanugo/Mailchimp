@@ -33,7 +33,7 @@ async def processResult(message: str, settings: list[str]):
     try:
         response =  await mailchimp.campaigns.list()
     except ApiClientError as err:
-        return err
+        return err.text
     campaigns = [item["settings"]["title"] for item in response["campaigns"]]
     campaigns = "\n".join(campaigns)
     return campaigns
