@@ -14,7 +14,7 @@ api_router.include_router(jsonfile.router, prefix="/integration.json", tags=["js
 
 mailchimp = Client()
 mailchimp.set_config({
-    "api_key": "775b33ecefa3a4ec4ec02eef303223c6-us14",
+    "api_key": "c48af55456078f2e19cbf1ce309dee34-us14",
     "server": "us14"
 })
 
