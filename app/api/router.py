@@ -22,7 +22,10 @@ class Item(BaseModel):
 @api_router.post("/")
 async def apipost(req: Item):
     data = {
-        "message": "your task was successful"
+        "event_name": "YOUR LISTS",
+		"message":    "your task was successful",
+		"status":     "success",
+		"username":   "CHARLES"
     }
     print(req)
     return data
