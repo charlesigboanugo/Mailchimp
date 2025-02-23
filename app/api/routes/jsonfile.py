@@ -18,7 +18,7 @@ def getJson():
                     "author": "Charles Igboanugo",
                     "descriptions": {
                         "app_description": settings.APP_DESCRIPTION,
-                        "app_logo": f"{settings.BASE_URL}/static/favicon.ico",
+                        "app_logo": f"{settings.BASE_URL}/static/stackerx.png",
                         "app_name": settings.APP_NAME,
                         "app_url": settings.BASE_URL,
                         "background_color": "#A6CDE0"
