@@ -16,7 +16,7 @@ api_router.include_router(jsonfile.router, prefix="/integration.json", tags=["js
 
 mailchimp = Client()
 mailchimp.set_config({
-    "api_key": "c48af55456078f2e19cbf1ce309dee34-us14",
+    "api_key": "31d331d9888fd4d2bee07fa090dcf5e4-us14",
     "server": "us14"
 })
 
@@ -30,31 +30,27 @@ class Payload(BaseModel):
 
 async def processResult(message: str, settings: list[str]):
 
-    """try:
+    try:
         response =  await mailchimp.campaigns.list()
     except ApiClientError as err:
-        return err"""
-    
-    """campaigns = [item["settings"]["title"] for item in response["campaigns"]]
+        return err
+    campaigns = [item["settings"]["title"] for item in response["campaigns"]]
     campaigns = "\n".join(campaigns)
-    return campaigns"""
-    return "great"
+    return campaigns
 
 @api_router.post("/")
-async def apipost(req: Request, res: Response):
-    """result = await processResult(req.message, req.settings)"""
+async def apipost(req: Payload):
+    result = await processResult(req.message, req.settings)
 
     data = {
         "event_name": "YOUR LISTS",
-		"message":    "result",
+		"message":     result,
 		"status":     "success",
 		"username":   "CHARLES"
     }
     print(req)
-    print(req.headers)
-    print(req.url)
-    return RedirectResponse("https://goal.com", status_code=302)
-
+    return data
+   
 @api_router.get("/")
 async def apiHome():
     return "api home"
