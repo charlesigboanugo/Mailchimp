@@ -17,12 +17,6 @@ api_router.include_router(jsonfile.router, prefix="/integration.json", tags=["js
 
 
 
-mailchimp = Client()
-mailchimp.set_config({
-    "api_key": settings.MAILCHIMP_KEY,
-    "server": "us14"
-})
-
 
 class Payload(BaseModel):
     message: str
@@ -32,6 +26,20 @@ class Payload(BaseModel):
         extra = "allow"
 
 async def processResult(message: str, settings: list[str]):
+    mailchimp = Client()
+    
+    MAILCHIMP_KEY = None
+    for item in settings:
+        if item["key"] == "Email":
+            MAILCHIMP_KEY = item["default"]
+
+    if MAILCHIMP_KEY is None:
+            return "you need to add your mailchimp api key in the app settings"
+    
+    mailchimp.set_config({
+    "api_key": MAILCHIMP_KEY,
+    "server": "us14"
+    })
 
     try:
         response =  mailchimp.campaigns.list()
