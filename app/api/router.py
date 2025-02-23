@@ -1,7 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Response, Request
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from mailchimp_marketing import Client
+from mailchimp_marketing.api_client import ApiClientError
 import httpx
 
 from app.api.routes import jsonfile
@@ -26,23 +27,32 @@ class Payload(BaseModel):
     class Config:
         extra = "allow"
 
-def processResult(message: str, settings: list[str]):
-    response = mailchimp.campaigns.list()
-    campaigns = [item["settings"]["title"] for item in response["campaigns"]]
+async def processResult(message: str, settings: list[str]):
+
+    """try:
+        response =  await mailchimp.campaigns.list()
+    except ApiClientError as err:
+        return err"""
+    
+    """campaigns = [item["settings"]["title"] for item in response["campaigns"]]
     campaigns = "\n".join(campaigns)
-    return campaigns
+    return campaigns"""
+    return "great"
 
 @api_router.post("/")
-async def apipost(req: Payload):
-    result = processResult(req.message, req.settings)
+async def apipost(req: Request, res: Response):
+    """result = await processResult(req.message, req.settings)"""
 
     data = {
         "event_name": "YOUR LISTS",
-		"message":    result,
+		"message":    "result",
 		"status":     "success",
 		"username":   "CHARLES"
     }
     print(req)
+    print(req.headers)
+    print(req.url)
+
     return data
 
 @api_router.get("/")

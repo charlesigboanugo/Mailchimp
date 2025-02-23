@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -27,10 +27,9 @@ app.include_router(api_router, prefix=settings.API_PREFIX, tags=["api"])
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.head("/")
-def appHead(request: Request):
-    print(request.headers.items())
-    return "good"
+def appHead(response: Response):
+    return response(status_code=200)
 
 @app.get('/')
 async def home(request: Request):
-    return {"home": "testing my first fastapi app"}
+    return {"home": "testing myy first fastapi app"}
