@@ -123,7 +123,7 @@ def getJson():
             "background_color": "#fff"
             },
             "is_active": True,
-            "integration_type": "interval",
+            "integration_type": "modifier",
             "integration_category": "Marketing Automation",
             "key_features": [
             "great easy"
