@@ -11,6 +11,7 @@ class Settings(BaseSettings):
 
     BASE_URL: str = "https://mailchimp-8err.onrender.com"
     API_PREFIX: str = "/api/v1"
+    MAILCHIMP_KEY: str = "3ff419ab78c0be4001eba6058f1a0cb5-us14"
 
     SECRET_KEY: str = secrets.token_urlsafe(32)
     ALLOWED_HOSTS: str = "*"
