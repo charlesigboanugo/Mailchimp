@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Response, Request
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from mailchimp_marketing import Client
@@ -52,8 +53,7 @@ async def apipost(req: Request, res: Response):
     print(req)
     print(req.headers)
     print(req.url)
-
-    return data
+    return RedirectResponse("https://goal.com", status_code=302)
 
 @api_router.get("/")
 async def apiHome():
