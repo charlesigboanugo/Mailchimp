@@ -118,8 +118,8 @@ def getJson():
             "descriptions": {
             "app_name": "stackerX",
             "app_description": "good and great",
-            "app_logo": "https://mailchimp-hqu1.onrender.com/static/stackerx.png",
-            "app_url": "https://mailchimp-hqu1.onrender.com/",
+            "app_logo": "https://mailchimp-8err.onrender.com/static/stackerx.png",
+            "app_url": "https://mailchimp-8err.onrender.com/",
             "background_color": "#fff"
             },
             "is_active": True,
@@ -149,8 +149,8 @@ def getJson():
                 "default": "james"
             }
             ],
-            "target_url": "https://mailchimp-hqu1.onrender.com/api/v1",
-            "tick_url": "https://mailchimp-hqu1.onrender.com/api/v1"
+            "target_url": "https://mailchimp-8err.onrender.com/api/v1",
+            "tick_url": "https://mailchimp-8err.onrender.com//api/v1"
         }
     }
   return jsonData
