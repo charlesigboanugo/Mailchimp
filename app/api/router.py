@@ -22,7 +22,7 @@ class Item(BaseModel):
 @api_router.post("/")
 async def apipost(req: Item):
     data = {
-        "message": "message",
+        "message": "your task was successful",
         "username": "Uptime Monitor",
         "event_name": "Uptime Check",
         "status": "success"
