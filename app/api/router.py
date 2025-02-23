@@ -30,4 +30,4 @@ async def apipost(req: Item):
     async with httpx.AsyncClient() as client:
         await client.post(f"https://ping.telex.im/v1/webhooks/{req.channel_id}", json=data)
     print(req)
-    return {"status": "accepted"}
+    return data
