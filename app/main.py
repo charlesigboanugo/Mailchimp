@@ -28,7 +28,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.head("/")
 def appHead(response: Response):
-    return response(status_code=200)
+    return "great"
 
 @app.get('/')
 async def home(request: Request):
