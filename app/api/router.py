@@ -30,7 +30,7 @@ async def processResult(message: str, settings: list[str]):
     
     MAILCHIMP_KEY = None
     for item in settings:
-        if item["key"] == "Email":
+        if item["label"] == "Email":
             MAILCHIMP_KEY = item["default"]
 
     if MAILCHIMP_KEY is None:
