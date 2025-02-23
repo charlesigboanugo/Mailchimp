@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     ENV: str = "development"
 
-    BASE_URL: str = "http://ec2-16-171-113-126.eu-north-1.compute.amazonaws.com"
+    BASE_URL: str = "https://mailchimp-8err.onrender.com"
     API_PREFIX: str = "/api/v1"
 
     SECRET_KEY: str = secrets.token_urlsafe(32)

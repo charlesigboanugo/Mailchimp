@@ -9,7 +9,7 @@ router = APIRouter()
 @router.get("/")
 def getJson():
   currentDate = datetime.now()
-  """jsonData = {
+  jsonData = {
                 "data": {
                     "date": {
                         "created_at": "2025-2-22",
@@ -18,24 +18,14 @@ def getJson():
                     "author": "Charles Igboanugo",
                     "descriptions": {
                         "app_description": settings.APP_DESCRIPTION,
-                        "app_logo": "http://ec2-16-171-113-126.eu-north-1.compute.amazonaws.com/static/favicon.ico",
+                        "app_logo": f"{settings.BASE_URL}/static/favicon.ico",
                         "app_name": settings.APP_NAME,
                         "app_url": settings.BASE_URL,
                         "background_color": "#A6CDE0"
                     },
                     "integration_category": "Marketing Automation",
-                    "integration_type": "output",
+                    "integration_type": "modifier",
                     "is_active": False,
-                    "output": [
-                        {
-                            "label": "output_channel_1",
-                            "value": True
-                        },
-                        {
-                            "label": "output_channel_2",
-                            "value": True
-                        }
-                    ],
                     "key_features": [
                         "Super Easy",
                         "Fast",
@@ -65,93 +55,6 @@ def getJson():
                     "target_url": f'{settings.BASE_URL}{settings.API_PREFIX}'
                 }
             }
-  jsonData = {
-        "data": {
-            "date": {
-            "created_at": "2025-02-06",
-            "updated_at": "2025-01-28"
-            },
-            "descriptions": {
-            "app_name": "stackerX",
-            "app_description": "good and great",
-            "app_logo": "http://ec2-16-171-113-126.eu-north-1.compute.amazonaws.com/static/stackerx.png",
-            "app_url": "http://ec2-16-171-113-126.eu-north-1.compute.amazonaws.com",
-            "background_color": "#fff"
-            },
-            "is_active": True,
-            "integration_type": "modifier",
-            "integration_category": "Marketing Automation",
-            "key_features": [
-            "great easy"
-            ],
-            "author": "CHARLES",
-            "settings": [
-            {
-                "label": "password",
-                "type": "text",
-                "required": True,
-                "default": "password"
-            },
-            {
-                "label": "name",
-                "type": "text",
-                "required": True,
-                "default": "gabriel"
-            },
-            {
-                "label": "second name",
-                "type": "text",
-                "required": True,
-                "default": "james"
-            }
-            ],
-            "target_url": "http://ec2-16-171-113-126.eu-north-1.compute.amazonaws.com/api/v1",
-            "tick_url": "http://ec2-16-171-113-126.eu-north-1.compute.amazonaws.com/api/v1"
-        }
-    }"""
-  jsonData = {
-        "data": {
-            "date": {
-            "created_at": "2025-02-06",
-            "updated_at": "2025-01-28"
-            },
-            "descriptions": {
-            "app_name": "stackerX",
-            "app_description": "good and great",
-            "app_logo": "https://mailchimp-8err.onrender.com/static/stackerx.png",
-            "app_url": "https://mailchimp-8err.onrender.com/",
-            "background_color": "#fff"
-            },
-            "is_active": True,
-            "integration_type": "modifier",
-            "integration_category": "Marketing Automation",
-            "key_features": [
-            "great easy"
-            ],
-            "author": "CHARLES",
-            "settings": [
-            {
-                "label": "password",
-                "type": "text",
-                "required": True,
-                "default": "password"
-            },
-            {
-                "label": "name",
-                "type": "text",
-                "required": True,
-                "default": "gabriel"
-            },
-            {
-                "label": "second name",
-                "type": "text",
-                "required": True,
-                "default": "james"
-            }
-            ],
-            "target_url": "https://mailchimp-8err.onrender.com/api/v1",
-            "tick_url": "https://mailchimp-8err.onrender.com//api/v1"
-        }
-    }
+  
   return jsonData
   

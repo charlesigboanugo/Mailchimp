@@ -26,10 +26,6 @@ app.include_router(api_router, prefix=settings.API_PREFIX, tags=["api"])
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.head("/")
-async def head_root():
-    return None
-
 @app.get('/')
 async def home():
     return {"home": "testing my first fastapi app"}
