@@ -41,13 +41,14 @@ async def processResult(message: str, settings: list[str]):
     })
 
     message = message.lstrip().lower()
-    message.
     if message.startswith("get"):
-        return dep.reply(message.,"get", mailchimp)
+        message = " ".join(message[3:].split())
+        return dep.reply(message, 0, mailchimp)
     elif message.startswith("add"):
-         return dep.reply(message,"add", mailchimp)
+        message = " ".join(message[3:].split())
+         return dep.reply(message, 1, mailchimp)
     else:
-         return dep.help()
+         return dep.help(help_type="full")
 
 @api_router.post("/")
 async def apipost(req: Payload):
