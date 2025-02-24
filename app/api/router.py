@@ -1,4 +1,5 @@
 import asyncio
+import re
 from fastapi import APIRouter
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -37,7 +38,7 @@ async def processResult(message: str, settings: list[str]):
     "api_key": MAILCHIMP_KEY,
     "server": "us14"
     })
-
+    message = re.sub(r'</?p>', '', message)
     message = message.lstrip().lower()
     if message.startswith("get"):
         message = " ".join(message[3:].split())
