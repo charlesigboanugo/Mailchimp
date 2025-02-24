@@ -41,10 +41,11 @@ async def processResult(message: str, settings: list[str]):
     })
 
     message = message.lstrip().lower()
+    message.
     if message.startswith("get"):
-        return dep.reply("get", mailchimp)
+        return dep.reply(message.,"get", mailchimp)
     elif message.startswith("add"):
-         return dep.reply("add", mailchimp)
+         return dep.reply(message,"add", mailchimp)
     else:
          return dep.help()
 

@@ -1,55 +1,66 @@
 matchDict = {
-    "audience":[],
-    "members":[],
-    "tags":[],
-    "segement":[],
-    "campaigns":[],
-    "signup":[],
-    "automations":[],
-    "templates":[],
-    "facebookadd":[],
-    "landingpage":[],
-    "socialpost":[],
-    "survey":[],
-    "report":[],
+    "audience":{[""]},
+    "members":{[], []},
+    "tags":{[], []},
+    "segement":{[], []},
+    "campaigns":{[], []},
+    "signup":{[], []},
+    "automations":{[], []},
+    "templates":{[], []},
+    "facebookadd":{[], []},
+    "landingpage":{[], []},
+    "socialpost":{[], []},
+    "survey":{[], []},
+    "report":{[], []},
 }
 
 
 async def getHelp(type: str = "full"):
-    return
-async def getReply(message: str, mailchimp):
+    result = ""
+    if str != "full":
+        for item in matchDict:
+            for x in item:
+                for y in x:
+                    result + y + "\n"
+    else:
+        for item in matchDict[type]:
+            for x in item:
+                result + x + "\n"
+    return result
+       
+async def reply(message: str, mailchimp):
+    if type == 
     getHelp(type="hint")
-    return getCampaigns()
 
-async def getCampaigns():
-    getHelp(type="getcamphint")
+async def Campaigns():
+    getHelp(type="campaigns")
     return
 
-async def getAudiences():
+async def Audiences():
     getHelp(type="getaudhint")
     return
 
-async def getSegments():
+async def Segments():
     getHelp(type="getseghint")
     return
 
-async def getTags():
+async def Tags():
     getHelp(type="gettaghint")
     return
 
-async def getAutomations():
+async def Automations():
     getHelp(type="getauthint")
     return
 
-async def getTemplates():
+async def Templates():
     getHelp(type="gettemhint")
     return
 
-async def getFaceAds():
+async def FaceAds():
     getHelp(type="getfachint")
     return
 
-async def getLandings():
+async def Landings():
     getHelp(type="getlanhint")
     return
 
@@ -62,14 +73,14 @@ async def getCampaigns(mailchimp):
     campaigns = "\n".join(campaigns)
     return campaigns
 
-async def getSocials():
+async def Socials():
     getHelp(type="getsochint")
     return
 
-async def getSurveys():
+async def Surveys():
     getHelp(type="getsurhint")
     return
 
-async def getReports():
+async def Reports():
     getHelp(type="getrephint")
     return
