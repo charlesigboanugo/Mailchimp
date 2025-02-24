@@ -8,6 +8,7 @@ matchDict = {
     "automations":[["get automations"], ["add automations"]],
     "templates":[["get templates"], ["add template"]],
     "facebook_ads":[["get facebook_ads"], ["add facebookads"]],
+    "landing_pages":[["get landing_pages"], ["add landing_pages"]],
 }
 """
 NOT IMPLEMENTED YET
@@ -15,7 +16,6 @@ NOT IMPLEMENTED YET
 "signups":[["get signups"], ["add signups"]],
 "tags":[["get tags in audience_name"], ["add tags in audience_name"]],
 "segments":[["get segements in audience_name"], ["add segements in audience_name"]],
-"landing_pages":[["get landing_pages"], ["add landing_pages"]],
 "socialposts":[["get socialposts"], ["add socialposts"]],
 "surveys":[["get surveys"], ["add surveys"]],
 "reports":[["get reports"], ["add reports"]],
