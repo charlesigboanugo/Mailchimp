@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from datetime import datetime
 
-from core.config import settings
+from core.config import mysettings
 
 
 router = APIRouter()
@@ -17,10 +17,10 @@ def getJson():
                     },
                     "author": "Charles Igboanugo",
                     "descriptions": {
-                        "app_description": settings.APP_DESCRIPTION,
-                        "app_logo": f"{settings.BASE_URL}/static/stackerx.png",
-                        "app_name": settings.APP_NAME,
-                        "app_url": settings.BASE_URL,
+                        "app_description": mysettings.APP_DESCRIPTION,
+                        "app_logo": f"{mysettings.BASE_URL}/static/stackerx.png",
+                        "app_name": mysettings.APP_NAME,
+                        "app_url": mysettings.BASE_URL,
                         "background_color": "#A6CDE0"
                     },
                     "integration_category": "Marketing Automation",
@@ -52,7 +52,7 @@ def getJson():
                             "default": ""
                         },
                     ],
-                    "target_url": f'{settings.BASE_URL}{settings.API_PREFIX}'
+                    "target_url": f'{mysettings.BASE_URL}{mysettings.API_PREFIX}'
                 }
             }
   

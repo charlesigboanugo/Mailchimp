@@ -1,244 +1,254 @@
-matchDict = {
-    "audiences":[[""][]],
-    "members":[[], []],
-    "tags":[[], []],
-    "segments":[[], []],
-    "campaigns":[[], []],
-    "signups":[[], []],
-    "automations":[[], []],
-    "templates":[[], []],
-    "facebookads":[[], []],
-    "landingpages":[[], []],
-    "socialposts":[[], []],
-    "surveys":[[], []],
-    "reports":[[], []],
-}
+from mailchimp_marketing.api_client import ApiClientError
+from mailchimp_marketing import Client
 
+matchDict = {
+    "lists":[["get lists", "get lists list_name"], ["add lists"]],
+    "members":[["get campaigns"], ["add campaigns"]],
+    "campaigns":[["get campaigns"], ["add campaigns"]],
+    "automations":[["get automations"], ["add automations"]],
+    "templates":[["get templates"], ["add template"]],
+    "facebook_ads":[["get facebook_ads"], ["add facebookads"]],
+}
+"""
+NOT IMPLEMENTED YET
+
+"signups":[["get signups"], ["add signups"]],
+"tags":[["get tags in audience_name"], ["add tags in audience_name"]],
+"segments":[["get segements in audience_name"], ["add segements in audience_name"]],
+"landing_pages":[["get landing_pages"], ["add landing_pages"]],
+"socialposts":[["get socialposts"], ["add socialposts"]],
+"surveys":[["get surveys"], ["add surveys"]],
+"reports":[["get reports"], ["add reports"]],
+
+"""
 async def help(help_type: str = "full", kind: int = 2):
     result = "Bad statement, see below for hints\n"
-    if help_type == "full" && kind == 2:
+    if help_type == "full" and kind == 2:
         for item in matchDict:
-            for x in item:
+            for x in matchDict[item]:
                 for y in x:
-                    result + y + "\n"
+                    result += y + "\n"
     elif kind == 2:
         for item in matchDict[help_type]:
             for x in item:
-                result + x + "\n"
+                result += x + "\n"
     else:
         if help_type == "full":
             for item in matchDict:
-                for x in item[kind]
-                    result + x + "\n"
+                for x in matchDict[item][kind]:
+                    result += x + "\n"
         else:
-            for item in matchDict[help_type][kind]
-                result + item + "\n"
-
+            for item in matchDict[help_type][kind]:
+                result += item + "\n"
+    
     return result
        
-async def reply(message: str, kind: int, mailchimp):
-    if any(message.startswith(key) for key in matchDict.keys()):
-        func = globals().get(key)
-        message = message.replace(key, "").lstrip()
-        return await func(message, kind, mailchimp)
-    else:
-        return help(kind=kind)
+async def reply(message: str, kind: int, mailchimp: Client):
+    if message.strip == "":
+        return await help(kind=kind)
+    for key in matchDict.keys():
+        if message.startswith(key):
+            func = globals().get(key)
+            message = message.replace(key, "").lstrip()
+            return await func(message, kind, mailchimp)
+    
+    return await help(kind=kind)
             
 
-async def campaigns(message, mailchimp, kind):
+async def campaigns(message: str, kind: int, mailchimp: Client):
     try:
-        response =  await mailchimp.audiences.list()
+        result = mailchimp.campaigns.list()
     except ApiClientError as err:
         return err.text
-    audiences = [item["settings"]["title"] for item in response["audiences"]]
-    if message = ""
-        audiences = "\n".join(audiences)
-        return audiences
-
-    elif message.startswith("in"):
-
-    elif "in" in messages.split():
-            check for campaign with audience else return err
-    elif message in audiences:
-        for item in response["audiences"]:
-            if item["settings"]["title"] == message:
-                return
+    camp = [item["settings"]["title"] for item in result["campaigns"]]
+    if message == "":
+        camp = "\n".join(camp)
+        return camp
+    elif message.startswith("in "):
+        return 
+    elif "in " in message.split():
+        return
+    elif message in [x.lower() for x in camp]:
+        for item in result["campaigns"]:
+            if item["settings"]["title"].lower() == message:
+                return item["settings"]["title"]
     else:
-        return help(help_type="audiences", kind=kind)
+        return await help(help_type="campaigns", kind=kind)
          
-async def audiences(message, kind, mailchimp):
+async def lists(message: str, kind: int, mailchimp: Client):
     try:
-        response =  await mailchimp.audiences.list()
+        result = mailchimp.lists.get_all_lists()
     except ApiClientError as err:
         return err.text
-    audiences = [item["settings"]["title"] for item in response["audiences"]]
-    if message = ""
-        audiences = "\n".join(audiences)
-        return audiences
-    elif message in audiences:
-        for item in response["audiences"]:
+    lists = [item["name"] for item in result["lists"]]
+    print(message)
+    if message == "":
+        lists = "\n".join(lists)
+        return lists
+    elif message in [x.lower() for x in lists]:
+        for item in result["lists"]:
+            if item["name"].lower() == message:
+                return item["name"]
+    else:
+        return await help(help_type="lists", kind=kind)
+
+async def automations(message: str, kind: int, mailchimp: Client):
+    try:
+        result = mailchimp.automations.list()
+    except ApiClientError as err:
+        return err.text
+    auto = [item["settings"]["title"] for item in result["automations"]]
+    if message == "":
+        auto = "\n".join(auto)
+        return auto
+    elif message in [x.lower() for x in auto]:
+        for item in result["automations"]:
+            if item["settings"]["title"].lower() == message:
+                return item["settings"]["title"]
+    else:
+        return await help(help_type="automations", kind=kind)
+
+async def templates(message: str, kind: int, mailchimp: Client):
+    try:
+        result = mailchimp.templates.list()
+    except ApiClientError as err:
+        return err.text
+    temp = [item["name"] for item in result["templates"]]
+    if message == "":
+        temp = "\n".join(temp)
+        return temp
+    elif message in [x.lower() for x in temp]:
+        for item in result["templates"]:
+            if item["name"] == message:
+                return item["name"]
+    else:
+        return await help(help_type="templates", kind=kind)
+
+async def facebook_ads(message: str, kind: int, mailchimp: Client):
+    try:
+        result = mailchimp.facebookAds.list()
+    except ApiClientError as err:
+        return err.text
+    face = [item["ad_content"] for item in result["facebook_ads"]]
+    if message == "":
+        face = "\n".join(face)
+        return face
+    elif message in [x.lower() for x in face]:
+        for item in result["facebook_ads"]:
+            if item["ad_content"].lower() == message:
+                return
+    else:
+        return await help(help_type="facebookads", kind=kind)
+
+async def landing_pages(message: str, kind: int, mailchimp: Client):
+    try:
+        result = mailchimp.landingPages.get_all()
+    except ApiClientError as err:
+        return err.text
+    land = [item["title"] for item in result["landing_pages"]]
+    if message == "":
+        land = "\n".join(land)
+        return land
+    elif message in [x.lower() for x in land]:
+        for item in result["landing_pages"]:
+            if item["title"].lower() == message:
+                return item["title"]
+    else:
+        return await help(help_type="landing_pages", kind=kind)
+
+"""async def socialposts(message: str, kind: int, mailchimp: Client):
+    try:
+        result = mailchimp
+    except ApiClientError as err:
+        return err.text
+    lists = [item["settings"]["title"] for item in result["lists"]]
+    if message == "":
+        lists = "\n".join(lists)
+        return lists
+    elif message in lists:
+        for item in result["lists"]:
             if item["settings"]["title"] == message:
                 return
     else:
-        return help(help_type="audiences", kind=kind)
-
-async def automations():
+        return await help(help_type="lists", kind=kind)
+"""
+"""async def surveys(message: str, kind: int, mailchimp: Client):
     try:
-        response =  await mailchimp.audiences.list()
+        result = mailchimp
     except ApiClientError as err:
         return err.text
-    audiences = [item["settings"]["title"] for item in response["audiences"]]
-    if message = ""
-        audiences = "\n".join(audiences)
-        return audiences
-    elif message in audiences:
-        for item in response["audiences"]:
+    lists = [item["settings"]["title"] for item in result["lists"]]
+    if message == "":
+        lists = "\n".join(lists)
+        return lists
+    elif message in lists:
+        for item in result["lists"]:
             if item["settings"]["title"] == message:
                 return
     else:
-        return help(help_type="audiences", kind=kind)
+        return await help(help_type="lists", kind=kind)
 
-async def templates():
+async def reports(message: str, kind: int, mailchimp: Client):
     try:
-        response =  await mailchimp.audiences.list()
+        result =mailchimp.reports.get_all_campaign_reports()
     except ApiClientError as err:
         return err.text
-    audiences = [item["settings"]["title"] for item in response["audiences"]]
-    if message = ""
-        audiences = "\n".join(audiences)
-        return audiences
-    elif message in audiences:
-        for item in response["audiences"]:
+    lists = [item["settings"]["title"] for item in result["lists"]]
+    if message =="":
+        lists = "\n".join(lists)
+        return lists
+    elif message in lists:
+        for item in result["lists"]:
             if item["settings"]["title"] == message:
                 return
     else:
-        return help(help_type="audiences", kind=kind)
+        return await help(help_type="lists", kind=kind)
 
-async def facebookads():
-    try:
-        response =  await mailchimp.audiences.list()
-    except ApiClientError as err:
-        return err.text
-    audiences = [item["settings"]["title"] for item in response["audiences"]]
-    if message = ""
-        audiences = "\n".join(audiences)
-        return audiences
-    elif message in audiences:
-        for item in response["audiences"]:
-            if item["settings"]["title"] == message:
-                return
-    else:
-        return help(help_type="audiences", kind=kind)
-
-async def landingpages():
-    try:
-        response =  await mailchimp.audiences.list()
-    except ApiClientError as err:
-        return err.text
-    audiences = [item["settings"]["title"] for item in response["audiences"]]
-    if message = ""
-        audiences = "\n".join(audiences)
-        return audiences
-    elif message in audiences:
-        for item in response["audiences"]:
-            if item["settings"]["title"] == message:
-                return
-    else:
-        return help(help_type="audiences", kind=kind)
-
-async def socialposts():
-    try:
-        response =  await mailchimp.audiences.list()
-    except ApiClientError as err:
-        return err.text
-    audiences = [item["settings"]["title"] for item in response["audiences"]]
-    if message = ""
-        audiences = "\n".join(audiences)
-        return audiences
-    elif message in audiences:
-        for item in response["audiences"]:
-            if item["settings"]["title"] == message:
-                return
-    else:
-        return help(help_type="audiences", kind=kind)
-
-async def surveys():
-    try:
-        response =  await mailchimp.audiences.list()
-    except ApiClientError as err:
-        return err.text
-    audiences = [item["settings"]["title"] for item in response["audiences"]]
-    if message = ""
-        audiences = "\n".join(audiences)
-        return audiences
-    elif message in audiences:
-        for item in response["audiences"]:
-            if item["settings"]["title"] == message:
-                return
-    else:
-        return help(help_type="audiences", kind=kind)
-
-async def reports():
-    try:
-        response =  await mailchimp.audiences.list()
-    except ApiClientError as err:
-        return err.text
-    audiences = [item["settings"]["title"] for item in response["audiences"]]
-    if message = ""
-        audiences = "\n".join(audiences)
-        return audiences
-    elif message in audiences:
-        for item in response["audiences"]:
-            if item["settings"]["title"] == message:
-                return
-    else:
-        return help(help_type="audiences", kind=kind)
-
-async def signups():
-    if message == "" or !message.startswith("in"):
+async def signups(message: str, kind: int, mailchimp: Client):
+    if message == "" or not message.startswith("in"):
         return help
     else:
         aud = message[2:].lstrip()
         try:
-            response =  await mailchimp.audiences.list()
+            result =mailchimp.lists.list()
         except ApiClientError as err:
             return err.text
-        audiences = [item["settings"]["title"] for item in response["audiences"]]
+        lists = [item["settings"]["title"] for item in result["lists"]]
 
-async def members():
-    if message == "" or !message.startswith("in"):
+async def members(message: str, kind: int, mailchimp: Client):
+    if message == "" or not message.startswith("in"):
         return help
     else:
         aud = message[2:].lstrip()
         try:
-            response =  await mailchimp.audiences.list()
+            result =mailchimp.lists.list()
         except ApiClientError as err:
             return err.text
-        audiences = [item["settings"]["title"] for item in response["audiences"]]
+        lists = [item["settings"]["title"] for item in result["lists"]]
 
 
-async def segments(message, kind, mailchimp):
-    if message == "" or !message.startswith("in"):
+async def segments(message: str, kind: int, mailchimp: Client):
+    if message == "" or not message.startswith("in"):
         return help
     else:
         aud = message[2:].lstrip()
         try:
-            response =  await mailchimp.audiences.list()
+            result =mailchimp.lists.list()
         except ApiClientError as err:
             return err.text
-        audiences = [item["settings"]["title"] for item in response["audiences"]]
+        lists = [item["settings"]["title"] for item in result["lists"]]
 
 
-async def tags():
-    if message == "" or !message.startswith("in"):
+async def tags(message: str, kind: int, mailchimp: Client):
+    if message == "" or not message.startswith("in"):
         return help
     else:
         aud = message[2:].lstrip()
         try:
-            response =  await mailchimp.audiences.list()
+            result =mailchimp.lists.list()
         except ApiClientError as err:
             return err.text
-        audiences = [item["settings"]["title"] for item in response["audiences"]]
+        lists = [item["settings"]["title"] for item in result["lists"]]
 
-
+"""
 

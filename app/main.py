@@ -2,13 +2,13 @@ from fastapi import FastAPI, Request, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-from core.config import settings
+from core.config import mysettings
 from app.api.router import api_router
 
-app = FastAPI(debug=settings.DEBUG,
-               title=settings.APP_NAME,
-               description=settings.APP_DESCRIPTION,
-               version=settings.APP_VERSION)
+app = FastAPI(debug=mysettings.DEBUG,
+               title=mysettings.APP_NAME,
+               description=mysettings.APP_DESCRIPTION,
+               version=mysettings.APP_VERSION)
 
 app.add_middleware(CORSMiddleware, 
                    allow_origins=[
@@ -22,7 +22,7 @@ app.add_middleware(CORSMiddleware,
                    allow_headers=["*"]
                    )
 
-app.include_router(api_router, prefix=settings.API_PREFIX, tags=["api"])
+app.include_router(api_router, prefix=mysettings.API_PREFIX, tags=["api"])
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

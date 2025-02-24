@@ -25,13 +25,13 @@ class Settings(BaseSettings):
     DATABASE_PASSWORD: str = "testpassword"
 
     @property
-    def DATABASE_URL():
-        url = f"mysql+aiomysql://{settings.DATABASE_USER}:{settings.DATABASE_PASSWORD}@{settings.DATABASE_HOST}:{settings.DATABASE_PORT}/{settings.DATABASE_NAME}"
+    def DATABASE_URL(self):
+        url = f"mysql+aiomysql://{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@{self.DATABASE_HOST}:{self.DATABASE_PORT}/{self.DATABASE_NAME}"
         return url
 
     
     class Config:
         env_file = ".env"  # Load from environment variables or a .env file
 
-settings = Settings()
+mysettings = Settings()
     

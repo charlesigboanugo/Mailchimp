@@ -1,12 +1,12 @@
+import asyncio
 from fastapi import APIRouter
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from mailchimp_marketing import Client
-from mailchimp_marketing.api_client import ApiClientError
 
 from app.api.routes import jsonfile
 from app.api import dependency as dep
-from core.config import settings
+from core.config import mysettings
 
 
 api_router = APIRouter()
@@ -26,12 +26,12 @@ class Payload(BaseModel):
 async def processResult(message: str, settings: list[str]):
     
     mailchimp = Client()
-    
-    MAILCHIMP_KEY = None
-    for item in settings:
+
+    MAILCHIMP_KEY = mysettings.MAILCHIMP_KEY
+    """for item in settings:
         if item["label"] == "Email":
             MAILCHIMP_KEY = item["default"]
-
+    """
     if MAILCHIMP_KEY is None:
             return "you need to add your mailchimp api key in the app settings"
     
@@ -43,12 +43,15 @@ async def processResult(message: str, settings: list[str]):
     message = message.lstrip().lower()
     if message.startswith("get"):
         message = " ".join(message[3:].split())
-        return dep.reply(message, 0, mailchimp)
+        result = await dep.reply(message, 0, mailchimp)
+        return result
     elif message.startswith("add"):
         message = " ".join(message[3:].split())
-         return dep.reply(message, 1, mailchimp)
+        result = await dep.reply(message, 1, mailchimp)
+        return result
     else:
-         return dep.help(help_type="full")
+         result = await dep.help(help_type="full")
+         return result
 
 @api_router.post("/")
 async def apipost(req: Payload):
