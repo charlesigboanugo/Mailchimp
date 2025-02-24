@@ -46,7 +46,7 @@ def getJson():
                             "default": ""
                         },
                         {
-                            "label": "Email",
+                            "label": "api key",
                             "type": "text",
                             "required": True,
                             "default": ""
