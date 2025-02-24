@@ -58,7 +58,7 @@ async def apipost(req: Payload):
 
     data = {
         "event_name": "YOUR LISTS",
-		"message":     "<h1 style='font-size: 25px;color: purple;'>Response<h1>\n" + f"<p style='border-left: solid green 7px; padding: 20px; background-color: #090909; color: white;'>{result}<p>",
+		"message":     "<h1 style='font-size: 25px;color: purple;'>Response<h1>\n" + f"<p style='border-left: solid green 7px; padding: 20px; background-color, line-height: 1.7; #090909; color: white;'>{result}<p>",
 		"status":     "success",
 		"username":   "CHARLES"
     }
