@@ -287,5 +287,5 @@ async def inHtml(result: str):
     result = f"<div style='border-left: solid green 7px; padding: 20px;"
     f"background-color: #090909; line-height: 2; width: 80%;"
     f"color: white;'><h1 style='font-size: 2Opx;'>Response<h1>\n"
-    f"<p style='font-size:16;'>{result}</p><div>"
+    f"<p style='font-size:16;'>{result}</p></div>"
     return result
