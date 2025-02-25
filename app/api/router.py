@@ -20,7 +20,7 @@ class Payload(BaseModel):
 @api_router.post("/")
 async def apipost(req: Payload):
     result = await dep.processResult(req.message, req.settings)
-    result = dep.inHtml(result)
+    result = await dep.inHtml(result)
     
     data = {
         "event_name": "YOUR LISTS",
