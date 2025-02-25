@@ -27,7 +27,7 @@ NOT IMPLEMENTED YET
 
 """
 async def help(help_type: str = "full", kind: int = 2):
-    result = "<h4 style='font-weight:500;'>Bad statement, see below for hints:<h4>\n"
+    result = "Bad statement, see below for hints:\n"
     if help_type == "full" and kind == 2:
         for item in matchDict:
             for x in matchDict[item]:
@@ -261,6 +261,7 @@ async def processResult(message: str, settings: list[str]):
     
     mailchimp = Client()
 
+    #developer mode
     #MAILCHIMP_KEY = mysettings.MAILCHIMP_KEY
     for item in settings:
         if item["label"] == "api key":
@@ -288,8 +289,8 @@ async def processResult(message: str, settings: list[str]):
 async def inHtml(result: str):
     result = html = (
         f"<div style='border-left: solid green 7px; padding: 10px; background-color:"
-        f"#090909; line-height: 2; color: white; width:600px;'>"
+        f"#090909; line-height: 2; color: white; width:600px; max-width: 80vw'>"
         f"<h1 style='font-size: 20px; font-weight: 600; margin-bottom: 10px;'>Response<hr/></h1>"
-        f"<p style='padding-left: 20px;'>{result}</p></div>"
+        f"<p>{result}</p></div>"
     )
     return result
