@@ -261,10 +261,10 @@ async def processResult(message: str, settings: list[str]):
     
     mailchimp = Client()
 
-    MAILCHIMP_KEY = mysettings.MAILCHIMP_KEY
-    """for item in settings:
+    #MAILCHIMP_KEY = mysettings.MAILCHIMP_KEY
+    for item in settings:
         if item["label"] == "api key":
-            MAILCHIMP_KEY = item["default"]"""
+            MAILCHIMP_KEY = item["default"]
     if MAILCHIMP_KEY is None:
             return "you need to add your mailchimp api key in the app settings"
     mailchimp.set_config({
