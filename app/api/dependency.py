@@ -27,7 +27,7 @@ NOT IMPLEMENTED YET
 
 """
 async def help(help_type: str = "full", kind: int = 2):
-    result = "Bad statement, see below for hints\n"
+    result = "<h4 style='font-weight:500;'>Bad statement, see below for hints:<h4>\n"
     if help_type == "full" and kind == 2:
         for item in matchDict:
             for x in matchDict[item]:
@@ -289,7 +289,7 @@ async def inHtml(result: str):
     result = html = (
         f"<div style='border-left: solid green 7px; padding: 10px; background-color:"
         f"#090909; line-height: 2; color: white; width:600px;'>"
-        f"<h1 style='font-size: 20px; margin-bottom: 10px;'>Response<hr/></h1>"
-        f"<p>{result}</p></div>"
+        f"<h1 style='font-size: 20px; font-weight: 600; margin-bottom: 10px;'>Response<hr/></h1>"
+        f"<p style='padding-left: 20px;'>{result}</p></div>"
     )
     return result
