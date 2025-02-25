@@ -1,3 +1,6 @@
+import asyncio
+import re
+
 from mailchimp_marketing.api_client import ApiClientError
 from mailchimp_marketing import Client
 
@@ -252,3 +255,37 @@ async def tags(message: str, kind: int, mailchimp: Client):
 
 """
 
+async def processResult(message: str, settings: list[str]):
+    
+    mailchimp = Client()
+
+    MAILCHIMP_KEY = None
+    for item in settings:
+        if item["label"] == "api key":
+            MAILCHIMP_KEY = item["default"]
+    if MAILCHIMP_KEY is None:
+            return "you need to add your mailchimp api key in the app settings"
+    mailchimp.set_config({
+    "api_key": MAILCHIMP_KEY,
+    "server": "us14"
+    })
+    message = re.sub(r'</?p>', '', message)
+    message = message.lstrip().lower()
+    if message.startswith("get"):
+        message = " ".join(message[3:].split())
+        result = await reply(message, 0, mailchimp)
+        return result
+    elif message.startswith("add"):
+        message = " ".join(message[3:].split())
+        result = await reply(message, 1, mailchimp)
+        return result
+    else:
+         result = await help(help_type="full")
+         return result
+
+async def inHtml(result: str):
+    result = f"<div style='border-left: solid green 7px; padding: 20px;
+               background-color: #090909; line-height: 2; width: 80%;
+               color: white;'><h1 style='font-size: 2Opx;'>Response<h1>\\n
+               <p style='font-size:16;'>{result}</p><div>"
+    return result
