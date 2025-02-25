@@ -4,6 +4,8 @@ import re
 from mailchimp_marketing.api_client import ApiClientError
 from mailchimp_marketing import Client
 
+from core.config import mysettings
+
 matchDict = {
     "lists":[["get lists", "get lists list_name"], ["add lists"]],
     "members":[["get campaigns"], ["add campaigns"]],
@@ -259,10 +261,10 @@ async def processResult(message: str, settings: list[str]):
     
     mailchimp = Client()
 
-    MAILCHIMP_KEY = None
-    for item in settings:
+    MAILCHIMP_KEY = mysettings.MAILCHIMP_KEY
+    """for item in settings:
         if item["label"] == "api key":
-            MAILCHIMP_KEY = item["default"]
+            MAILCHIMP_KEY = item["default"]"""
     if MAILCHIMP_KEY is None:
             return "you need to add your mailchimp api key in the app settings"
     mailchimp.set_config({
@@ -284,8 +286,10 @@ async def processResult(message: str, settings: list[str]):
          return result
 
 async def inHtml(result: str):
-    result = f"<div style='border-left: solid green 7px; padding: 20px;"
-    f"background-color: #090909; line-height: 2; width: 80%;"
-    f"color: white;'><h1 style='font-size: 2Opx;'>Response<h1>\n"
-    f"<p style='font-size:16;'>{result}</p></div>"
+    result = html = (
+        f"<div style='border-left: solid green 7px; padding: 20px; background-color:"
+        f"#090909; line-height: 2; width: 80%; color: white;'>"
+        f"<h1 style='font-size: 20px;'>Response</h1>"
+        f"<p style='font-size:16px;'>{result}</p></div>"
+    )
     return result
