@@ -287,9 +287,9 @@ async def processResult(message: str, settings: list[str]):
 
 async def inHtml(result: str):
     result = html = (
-        f"<div style='border-left: solid green 7px; padding: 25px; background-color:"
-        f"#090909; line-height: 2; color: white;'>"
-        f"<h1 style='font-size: 20px; margin-bottom: 5px;'>Response</h1><hr/>"
+        f"<div style='border-left: solid green 7px; padding: 10px; background-color:"
+        f"#090909; line-height: 2; color: white; width:600px;'>"
+        f"<h1 style='font-size: 20px; margin-bottom: 20px;'>Response</h1><hr/>"
         f"<p>{result}</p></div>"
     )
     return result
